@@ -22,6 +22,7 @@ const { title, description = "Jeffrey Chang's projects and hobbies" } = Astro.pr
         <div class="nav-links">
           <a href="/technical/">Technical</a>
           <a href="/hobbies/">Hobbies</a>
+          <a href="/food/">Food &amp; Drink</a>
         </div>
       </nav>
     </header>
@@ -163,6 +164,16 @@ const { title, description = "Jeffrey Chang's projects and hobbies" } = Astro.pr
     border-radius: 999px;
     padding: 0.1rem 0.6rem;
     color: var(--text-muted);
+  }
+
+  .rating {
+    color: #d97706;
+    letter-spacing: 0.1em;
+    font-size: 0.9rem;
+  }
+
+  .card .rating {
+    margin-bottom: 0.35rem;
   }
 
   .section-title {

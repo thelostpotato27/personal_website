@@ -1,0 +1,32 @@
+---
+interface Props {
+  rating: number;
+}
+
+const { rating } = Astro.props;
+
+const half = Math.round(rating * 2) / 2;
+const full = Math.floor(half);
+const hasHalf = half % 1 !== 0;
+const empty = 5 - Math.ceil(half);
+---
+
+<span class="rating" aria-label={`Rated ${rating} out of 5`}>
+  <span aria-hidden="true">{'★'.repeat(full)}{hasHalf && <span class="half-star">☆<span class="half-star-fill">★</span></span>}{'☆'.repeat(empty)}</span>
+  {rating}
+</span>
+
+<style>
+  .half-star {
+    position: relative;
+    display: inline-block;
+  }
+
+  .half-star-fill {
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 50%;
+    overflow: hidden;
+  }
+</style>

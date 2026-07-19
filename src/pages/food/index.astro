@@ -1,0 +1,29 @@
+---
+import { getCollection } from 'astro:content';
+import Base from '../../layouts/Base.astro';
+import ItemCard from '../../components/ItemCard.astro';
+import TagSearch from '../../components/TagSearch.astro';
+
+const items = (await getCollection('food')).sort(
+  (a, b) => b.data.date.valueOf() - a.data.date.valueOf()
+);
+---
+
+<Base title="Food &amp; Drink — Jeffrey Chang">
+  <h1 class="section-title">Food &amp; Drink</h1>
+  <p class="section-intro">Reviews of places I've eaten and things I've drunk.</p>
+  <TagSearch />
+  <div class="card-grid">
+    {
+      items.map((item) => (
+        <ItemCard
+          href={`/food/${item.id}/`}
+          title={item.data.title}
+          summary={item.data.summary}
+          tags={item.data.tags}
+          rating={item.data.rating}
+        />
+      ))
+    }
+  </div>
+</Base>

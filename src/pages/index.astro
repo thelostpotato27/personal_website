@@ -8,14 +8,15 @@ const byDate = (a: { data: { date: Date } }, b: { data: { date: Date } }) =>
 
 const technical = (await getCollection('technical')).sort(byDate);
 const hobbies = (await getCollection('hobbies')).sort(byDate);
+const food = (await getCollection('food')).sort(byDate);
 ---
 
 <Base title="Jeffrey Chang">
   <section class="hero">
     <h1>Hi, I'm Jeffrey.</h1>
     <p class="section-intro">
-      This is where I keep my projects and hobbies. Browse the technical work
-      or see what I do for fun.
+      This is where I keep my projects and hobbies. Browse the technical work,
+      see what I do for fun, or read my food &amp; drink reviews.
     </p>
   </section>
 
@@ -55,6 +56,28 @@ const hobbies = (await getCollection('hobbies')).sort(byDate);
               title={item.data.title}
               summary={item.data.summary}
               tags={item.data.tags}
+            />
+          ))
+      }
+    </div>
+  </section>
+
+  <section>
+    <div class="section-head">
+      <h2 class="section-title">Food &amp; Drink</h2>
+      <a href="/food/">View all &rarr;</a>
+    </div>
+    <div class="card-grid">
+      {
+        food
+          .slice(0, 3)
+          .map((item) => (
+            <ItemCard
+              href={`/food/${item.id}/`}
+              title={item.data.title}
+              summary={item.data.summary}
+              tags={item.data.tags}
+              rating={item.data.rating}
             />
           ))
       }

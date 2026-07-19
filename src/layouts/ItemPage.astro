@@ -1,5 +1,6 @@
 ---
 import Base from './Base.astro';
+import Stars from '../components/Stars.astro';
 
 interface Props {
   title: string;
@@ -7,11 +8,13 @@ interface Props {
   date: Date;
   links: { label: string; url: string }[];
   tags: string[];
+  rating?: number;
   backHref: string;
   backLabel: string;
 }
 
-const { title, summary, date, links, tags, backHref, backLabel } = Astro.props;
+const { title, summary, date, links, tags, rating, backHref, backLabel } =
+  Astro.props;
 ---
 
 <Base title={title} description={summary}>
@@ -20,6 +23,7 @@ const { title, summary, date, links, tags, backHref, backLabel } = Astro.props;
     <h1>{title}</h1>
     <p class="item-meta">
       {date.toLocaleDateString('en-US', { year: 'numeric', month: 'long' })}
+      {rating !== undefined && <Stars rating={rating} />}
     </p>
     {
       tags.length > 0 && (
@@ -86,6 +90,12 @@ const { title, summary, date, links, tags, backHref, backLabel } = Astro.props;
 
   .item-body :global(p) {
     margin-bottom: 1rem;
+  }
+
+  .item-body :global(img) {
+    max-width: 100%;
+    height: auto;
+    border-radius: 8px;
   }
 
   .item-body :global(ul),

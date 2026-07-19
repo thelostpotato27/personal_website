@@ -1,16 +1,20 @@
 ---
+import Stars from './Stars.astro';
+
 interface Props {
   href: string;
   title: string;
   summary: string;
   tags: string[];
+  rating?: number;
 }
 
-const { href, title, summary, tags } = Astro.props;
+const { href, title, summary, tags, rating } = Astro.props;
 ---
 
 <a class="card" href={href}>
   <h3>{title}</h3>
+  {rating !== undefined && <Stars rating={rating} />}
   <p>{summary}</p>
   {
     tags.length > 0 && (

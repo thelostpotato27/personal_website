@@ -21,4 +21,11 @@ const hobbies = defineCollection({
   schema: itemSchema,
 });
 
-export const collections = { technical, hobbies };
+const food = defineCollection({
+  loader: glob({ pattern: '**/*.md', base: './src/content/food' }),
+  schema: itemSchema.extend({
+    rating: z.number().min(0).max(5).optional(),
+  }),
+});
+
+export const collections = { technical, hobbies, food };
