@@ -2,6 +2,7 @@
 import { getCollection } from 'astro:content';
 import Base from '../../layouts/Base.astro';
 import ItemCard from '../../components/ItemCard.astro';
+import TagSearch from '../../components/TagSearch.astro';
 
 const items = (await getCollection('technical')).sort(
   (a, b) => b.data.date.valueOf() - a.data.date.valueOf()
@@ -11,6 +12,7 @@ const items = (await getCollection('technical')).sort(
 <Base title="Technical — Jeffrey Chang">
   <h1 class="section-title">Technical</h1>
   <p class="section-intro">Software projects and other technical work.</p>
+  <TagSearch />
   <div class="card-grid">
     {
       items.map((item) => (

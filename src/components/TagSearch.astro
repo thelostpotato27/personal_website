@@ -1,0 +1,57 @@
+---
+// Client-side tag filter for a listing page's card grid. Matches cards whose
+// tags contain the query as a case-insensitive substring.
+---
+
+<input
+  type="search"
+  class="tag-search"
+  placeholder="Filter by tag…"
+  aria-label="Filter by tag"
+/>
+<p class="no-matches" hidden>No items match that tag.</p>
+
+<script>
+  const input = document.querySelector<HTMLInputElement>('.tag-search');
+  const noMatches = document.querySelector<HTMLElement>('.no-matches');
+  const cards = document.querySelectorAll<HTMLElement>('.card-grid .card');
+
+  input?.addEventListener('input', () => {
+    const query = input.value.trim().toLowerCase();
+    let shown = 0;
+    for (const card of cards) {
+      const tags = [...card.querySelectorAll('.tag')].map(
+        (tag) => tag.textContent?.toLowerCase() ?? ''
+      );
+      const match = query === '' || tags.some((tag) => tag.includes(query));
+      card.style.display = match ? '' : 'none';
+      if (match) shown++;
+    }
+    if (noMatches) noMatches.hidden = shown > 0;
+  });
+</script>
+
+<style>
+  .tag-search {
+    margin-top: 1.25rem;
+    width: 100%;
+    max-width: 320px;
+    padding: 0.5rem 0.85rem;
+    font: inherit;
+    font-size: 0.925rem;
+    color: var(--text);
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+  }
+
+  .tag-search:focus {
+    outline: 2px solid var(--accent);
+    outline-offset: 1px;
+  }
+
+  .no-matches {
+    margin-top: 1.5rem;
+    color: var(--text-muted);
+  }
+</style>
