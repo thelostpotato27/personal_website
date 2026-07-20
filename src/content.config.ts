@@ -1,15 +1,23 @@
-import { defineCollection, z } from 'astro:content';
+import { defineCollection, z, type SchemaContext } from 'astro:content';
 import { glob } from 'astro/loaders';
 
-const itemSchema = z.object({
-  title: z.string(),
-  summary: z.string(),
-  date: z.coerce.date(),
-  links: z
-    .array(z.object({ label: z.string(), url: z.string().url() }))
-    .default([]),
-  tags: z.array(z.string()).default([]),
-});
+const itemSchema = ({ image }: SchemaContext) =>
+  z.object({
+    title: z.string(),
+    summary: z.string(),
+    date: z.coerce.date(),
+    image: image().optional(),
+    imageAlt: z.string().optional(),
+    links: z
+      .array(z.object({ label: z.string(), url: z.string().url() }))
+      .default([]),
+    tags: z.array(z.string()).default([]),
+  });
+
+const reviewSchema = (ctx: SchemaContext) =>
+  itemSchema(ctx).extend({
+    rating: z.number().min(0).max(5).optional(),
+  });
 
 const technical = defineCollection({
   loader: glob({ pattern: '**/*.md', base: './src/content/technical' }),
@@ -23,9 +31,12 @@ const hobbies = defineCollection({
 
 const food = defineCollection({
   loader: glob({ pattern: '**/*.md', base: './src/content/food' }),
-  schema: itemSchema.extend({
-    rating: z.number().min(0).max(5).optional(),
-  }),
+  schema: reviewSchema,
 });
 
-export const collections = { technical, hobbies, food };
+const media = defineCollection({
+  loader: glob({ pattern: '**/*.md', base: './src/content/media' }),
+  schema: reviewSchema,
+});
+
+export const collections = { technical, hobbies, food, media };

@@ -3,6 +3,8 @@ title: Matsui before cafe work
 summary: Went to Matsui for the first time.
 date: 2026-07-19
 rating: 3.5
+image: ../../images/food/20260719_134435_torrance_matsui_beef_bowl.jpg
+imageAlt: Beef bowl at Matsui
 links: []
 tags: [matsui, torrance, japanese]
 ---

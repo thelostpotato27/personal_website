@@ -1,4 +1,5 @@
 ---
+import { Image } from 'astro:assets';
 import Stars from './Stars.astro';
 
 interface Props {
@@ -7,12 +8,19 @@ interface Props {
   summary: string;
   tags: string[];
   rating?: number;
+  image?: ImageMetadata;
+  imageAlt?: string;
 }
 
-const { href, title, summary, tags, rating } = Astro.props;
+const { href, title, summary, tags, rating, image, imageAlt } = Astro.props;
 ---
 
 <a class="card" href={href}>
+  {
+    image && (
+      <Image class="card-image" src={image} alt={imageAlt ?? title} width={600} />
+    )
+  }
   <h3>{title}</h3>
   {rating !== undefined && <Stars rating={rating} />}
   <p>{summary}</p>

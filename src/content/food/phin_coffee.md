@@ -3,6 +3,7 @@ title: Phin Coffee and dev
 summary: Got a matcha and worked on the initial rollout of my personal website
 date: 2026-07-19
 rating: 3.7
+image: ../../images/food/20260719_141956_torrance_phincoffee_strawberrymatcha_mixed.jpg
 links: []
 tags: [matcha, torrance, study cafe]
 ---

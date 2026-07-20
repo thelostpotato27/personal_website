@@ -21,6 +21,8 @@ const items = (await getCollection('hobbies')).sort(
           title={item.data.title}
           summary={item.data.summary}
           tags={item.data.tags}
+          image={item.data.image}
+          imageAlt={item.data.imageAlt}
         />
       ))
     }

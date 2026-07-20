@@ -23,6 +23,7 @@ const { title, description = "Jeffrey Chang's projects and hobbies" } = Astro.pr
           <a href="/technical/">Technical</a>
           <a href="/hobbies/">Hobbies</a>
           <a href="/food/">Food &amp; Drink</a>
+          <a href="/media/">Shows &amp; Movies</a>
         </div>
       </nav>
     </header>
@@ -137,6 +138,15 @@ const { title, description = "Jeffrey Chang's projects and hobbies" } = Astro.pr
   .card:hover {
     box-shadow: var(--shadow-hover);
     transform: translateY(-2px);
+  }
+
+  .card .card-image {
+    width: calc(100% + 2.5rem);
+    max-width: none;
+    margin: -1.25rem -1.25rem 1rem;
+    border-radius: 10px 10px 0 0;
+    aspect-ratio: 3 / 2;
+    object-fit: cover;
   }
 
   .card h3 {
